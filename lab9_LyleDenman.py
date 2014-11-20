@@ -319,64 +319,45 @@ def word_guess():
 
     # Create guess_word list to track correct guesses
     guess_word = []
+    final_answer = ''
     for letter in word:
         guess_word.append('*')
+        final_answer += ('*')
     length = len(guess_word)
 
     # Create guessed_list to track all guesses
     guessed_list = []
 
     # Continue running until the word is guessed
-    while ''.join(guess_word) != word:
+    while final_answer != word:
+        final_answer = ''
         print()
         guess = input('Guess a letter that is in the word: ')
 
+        # Check guessed letter against guessed_list
         if guess in guessed_list:
             print ('The letter \'', guess, '\' has already been guessed.', sep='')           
         else:
+            # If letter has not been guessed, add it to the guessed_list
             guessed_list.append(guess)
+            # If the guess is correct, display message
             if guess in word:
+                print ('Good guess!')
+                # Add correct letters into guess_word
                 for num in range(0, length):
                     if guess == word[num]:
                         guess_word[num] = guess
-                print ('Good guess!')
             else:
                 print ('The letter \'', guess, '\' is not in the word.',sep='')
 
-        print ('The word so far is:', ''.join(guess_word))
-        
+        # Update final_answer for while loop
+        for num in range(0, length):
+            final_answer += guess_word[num]
+
+        # Display the word so far
+        print ('The word so far is:', final_answer)
+
+    # Display victory message
     print ('Congratulations! You guessed the word!')
 
 main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
